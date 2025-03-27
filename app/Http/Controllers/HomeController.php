@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\NewsCategory;
+
 
 class HomeController extends Controller
 {
@@ -22,6 +24,7 @@ class HomeController extends Controller
         $categories = Category::where('parent_id', 0)
         ->with('children')
         ->get();
-        return view('home.home', compact('sliders', 'setting' , 'cars' , 'categories'));
+        $newcategories = NewsCategory::all();
+        return view('home.home', compact('sliders', 'setting' , 'cars' , 'categories' , 'newcategories'));
     }
 }

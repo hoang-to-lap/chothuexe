@@ -8,18 +8,18 @@ use App\Models\Category;
 use App\Models\Car;
 use App\Models\News;
 use App\Models\NewsCategory;
-class CategoryController extends Controller
+
+class NewsCategoryController extends Controller
 {
     //
-    public function index($slug,$categoryId){
+    public function index($slug,$newcategoryId){
         $setting = Setting::first();
         $categories = Category::where('parent_id', 0)
         ->with('children')
         ->get();
-        $cars = Car::where('category_id', $categoryId)
-        ->where('status', 'visible')
-        ->paginate(9);
         $newcategories = NewsCategory::all();
-      return view('car.category.list',compact('setting','categories','cars','newcategories')); 
+        $blog = News::where('id_categorynews', $newcategoryId)
+        ->paginate(9);
+      return view('news.newscategory.list',compact('setting','newcategories','blog','categories')); 
     }
 }

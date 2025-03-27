@@ -47,11 +47,24 @@
     <li class="nav-item {{ Request::is('cars') ? 'active' : '' }}">
       <a href="{{ route('car') }}" class="nav-link">Cars</a>
     </li>
-    <li class="nav-item {{ Request::is('blog') ? 'active' : '' }}">
-      <a href="blog.html" class="nav-link">Blog</a>
-    </li>
+  
     <li class="nav-item {{ Request::is('contact') ? 'active' : '' }}">
       <a href="contact.html" class="nav-link">Contact</a>
+    </li>
+    <li class="nav-item dropdown {{ Request::is('news/*') ? 'active' : '' }}">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        News
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach($newcategories as $newcategory)
+          <li class="dropdown-submenu {{ Request::is('newcategory/'.$newcategory->slug.'/*') ? 'active' : '' }}">
+            <a class="dropdown-item dropdown-toggle" href="{{ route('newcategory.blog', ['slug' => $newcategory->slug, 'id' => $newcategory->id]) }}">
+              {{ $newcategory->name }}
+            </a>
+           
+          </li>
+        @endforeach
+      </ul>
     </li>
   </ul>
 </div>
