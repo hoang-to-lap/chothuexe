@@ -139,41 +139,31 @@ $baseUrl = 'http://127.0.0.1:8081'
 				
 				<div id="rental-form" class="card p-4 mt-4" >
 					<h4>Nhập thông tin khách hàng</h4>
-					<form>
-					  <div class="form-group">
-						<label for="car-name">Tên xe: Mercedes</label>
-						
-					  </div>
-					  <div class="form-group mt-3">
-						<label for="name">Họ và tên:</label>
-						<input type="text" id="name" class="form-control" placeholder="Nhập họ và tên">
-					  </div>
-					  <div class="form-group mt-3">
-						<label for="phone">Số điện thoại:</label>
-						<input type="text" id="phone" class="form-control" placeholder="Nhập số điện thoại">
-					  </div>
-					  <div class="form-group mt-3">
-						<label for="email">Email:</label>
-						<input type="email" id="email" class="form-control" placeholder="Nhập email">
-					  </div>
-					  <div class="form-group">
-						<label for="car-name">Địa chỉ:</label>
-						<input type="text" id="car-name" class="form-control" placeholder="Nhập địa chỉ">
-					  </div>
-					  <div class="form-group">
-						<label for="car-name">Thời lượng:</label>
-						<input type="text" id="car-name" class="form-control" placeholder="Nhập thời lượng bạn muốn thuê">
-					  </div>
-					  <div class="form-group mt-3">
-						<label for="rental-type">Loại hình thuê:</label>
-						<select id="rental-type" class="form-control">
-						  <option value="day">Thuê ngày</option>
-						  <option value="month">Thuê tháng</option>
-						  <option value="year">Thuê năm</option>
-						</select>
-					  </div>
-					  <button type="submit" class="btn btn-success mt-4">Thuê ngay</button>
-					</form>
+					@if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+<form action="{{ route('booking.store') }}" method="POST">
+    @csrf
+    <input type="hidden" name="car_id" value="{{ $car->id }}">
+
+    <label for="customer_name">Họ tên:</label>
+    <input type="text" name="customer_name" required>
+
+    <label for="phone_number">Số điện thoại:</label>
+    <input type="text" name="phone_number" required>
+
+    <label for="start_date">Ngày bắt đầu:</label>
+    <input type="date" name="start_date" required>
+
+    <label for="end_date">Ngày kết thúc:</label>
+    <input type="date" name="end_date" required>
+
+    <label for="pickup_location">Địa điểm nhận xe:</label>
+    <input type="text" name="pickup_location" required>
+
+    <button type="submit">Đặt xe</button>
+</form>
 				  </div>
 				</div>
       </div>

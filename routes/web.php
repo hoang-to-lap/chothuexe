@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::get('/cars', [CarController::class, 'index'])->name('car');
 Route::get('/cars/{id}', [CarController::class, 'show'])->name('car.detail');
 Route::get('/newcategory/{slug}/{id}', [NewsCategoryController::class, 'index'])->name('newcategory.blog');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('new.detail');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');

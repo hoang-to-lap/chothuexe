@@ -8,7 +8,7 @@ use App\Models\Setting;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\NewsCategory;
-
+use App\Models\News;
 
 class HomeController extends Controller
 {
@@ -25,6 +25,10 @@ class HomeController extends Controller
         ->with('children')
         ->get();
         $newcategories = NewsCategory::all();
-        return view('home.home', compact('sliders', 'setting' , 'cars' , 'categories' , 'newcategories'));
+        $recentPosts = News::latest()
+    
+        ->take(3)
+        ->get();
+        return view('home.home', compact('sliders', 'setting' , 'cars' , 'categories' , 'newcategories' ,'recentPosts'));
     }
 }
